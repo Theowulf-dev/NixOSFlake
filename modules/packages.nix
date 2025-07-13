@@ -94,10 +94,10 @@
   
   # These scripts bellow are added as terminal commands.
   (writeShellScriptBin "nixos-edit" ''
-      cd /etc/nixos && sudo nano configuration.nix
+      sudo nano $HOME/Documents/Obsidian/NixOSFlake/configuration.nix
     '') # Opens configuration.nix in nano
   (writeShellScriptBin "nixos-edit-gui" ''
-      cd /etc/nixos && notepadqq configuration.nix
+      notepadqq $HOME/Documents/Obsidian/NixOSFlake/configuration.nix
     '') # Opens configuration.nix in notepadqq
     (writeShellScriptBin "nixos-rebuild-flake" ''
       nh os switch "$HOME/Documents/Obsidian/NixOSFlake"#nixos
