@@ -100,7 +100,7 @@
       cd /etc/nixos && notepadqq configuration.nix
     '') # Opens configuration.nix in notepadqq
     (writeShellScriptBin "nixos-rebuild-flake" ''
-      sudo nixos-rebuild switch --flake "$HOME/Documents/Obsidian/NixOSFlake"#nixos
+      nh os switch "$HOME/Documents/Obsidian/NixOSFlake"#nixos
     '') # Build my flake from Obsidian folder.
   ];
   

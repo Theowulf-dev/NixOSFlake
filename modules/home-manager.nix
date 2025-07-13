@@ -7,5 +7,9 @@
       ./dotfiles/test.nix
       # ./dotfiles/hyprland.nix
     ];
+	
+	xdg.mimeApps.defaultApplications = {
+	  "text/plain" = [ "notepadqq.desktop" ];
+	};
   };
 }
