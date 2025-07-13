@@ -4,8 +4,7 @@
     home.username = "nix";
     home.homeDirectory = "/home/nix";
     imports = [
-      ./dotfiles/test.nix
-      # ./dotfiles/hyprland.nix
+      ./dotfiles/hyprland-config.nix
     ];
 	
 	xdg.mimeApps.defaultApplications = {
