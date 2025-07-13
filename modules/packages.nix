@@ -53,8 +53,6 @@
   obs-studio
   obsidian
   inkscape
-  jetbrains.rider
-  jetbrains.rust-rover
   notepadqq
   krita
   telegram-desktop
@@ -67,6 +65,12 @@
   compsize
   nh
   nnn
+  
+  # Development
+  jetbrains.rider
+  jetbrains.rust-rover
+  rustc
+  cargo
   
   # Archive manager
   file-roller # I should replace with TauArchivMeister
