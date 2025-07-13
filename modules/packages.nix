@@ -42,7 +42,7 @@
   bottles
   brave
   cameractrls
-  # davinci-resolve
+  davinci-resolve
   discord
   godot
   gnome-disk-utility
@@ -53,7 +53,7 @@
   obs-studio
   obsidian
   inkscape
-  # jetbrains.rider
+  jetbrains.rider
   jetbrains.rust-rover
   notepadqq
   krita
