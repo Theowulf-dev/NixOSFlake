@@ -54,7 +54,7 @@
   obsidian
   inkscape
   # jetbrains.rider
-  # jetbrains.rust-rover
+  jetbrains.rust-rover
   notepadqq
   krita
   telegram-desktop
