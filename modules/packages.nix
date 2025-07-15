@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, unstable, ... }: {
   # Allow unfree packages.
   nixpkgs.config.allowUnfree = true;
   
@@ -67,7 +67,6 @@
   inkscape
   notepadqq
   nexusmods-app-unfree
-  steamtinkerlaunch
   krita
   telegram-desktop
   
@@ -82,6 +81,7 @@
   
   # Development
   jetbrains.rider
+  unstable.avalonia
   jetbrains.rust-rover
   rustc
   rustup
