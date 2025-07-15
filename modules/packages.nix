@@ -29,6 +29,18 @@
   # Enable Docker.
   virtualisation.docker.enable = true;
   
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-compute-runtime
+      intel-ocl
+      intel-media-driver
+      intel-gpu-tools
+      vpl-gpu-rt
+      intel-vaapi-driver
+    ];
+  };
+  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -54,6 +66,8 @@
   obsidian
   inkscape
   notepadqq
+  nexusmods-app-unfree
+  steamtinkerlaunch
   krita
   telegram-desktop
   
@@ -70,6 +84,7 @@
   jetbrains.rider
   jetbrains.rust-rover
   rustc
+  rustup
   cargo
   
   # Archive manager

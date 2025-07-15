@@ -17,6 +17,9 @@
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
+  # Enable plasma 6
+  services.desktopManager.plasma6.enable = true;
+  
   system.stateVersion = "25.05";
 
 }
