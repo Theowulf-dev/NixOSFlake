@@ -82,10 +82,32 @@
   # Development
   jetbrains.rider
   unstable.avalonia
+  dotnet-sdk_9
+  fontconfig
+  (makeDesktopItem {
+          name = "rider-steam-run";
+          desktopName = "Rider (FHS - Avalonia)";
+          genericName = "Integrated Development Environment";
+          comment = "Run Rider inside a FHS environment for .NET UI dev";
+          icon = "rider";
+          exec = "steam-run rider %f";
+          categories = [ "Development" "IDE" ];
+          startupNotify = true;
+        })
   jetbrains.rust-rover
   rustc
   rustup
   cargo
+  (makeDesktopItem {
+          name = "rust-rover-steam-run";
+          desktopName = "Rust Rover (FHS)";
+          genericName = "Integrated Development Environment";
+          comment = "Run Rust Rover inside a FHS environment for dev";
+          icon = "rust-rover";
+          exec = "steam-run rust-rover %f";
+          categories = [ "Development" "IDE" ];
+          startupNotify = true;
+        })
   
   # Archive manager
   file-roller # I should replace with TauArchivMeister
