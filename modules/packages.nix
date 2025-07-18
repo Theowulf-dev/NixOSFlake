@@ -29,6 +29,9 @@
   # Enable Docker.
   virtualisation.docker.enable = true;
   
+  # Enable virtualisation.
+  virtualisation.libvirtd.enable = true;
+  
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -59,14 +62,16 @@
   godot
   gnome-disk-utility
   gnome-boxes
+  kvmtool
   gnome-system-monitor
   gitkraken
   motrix
   obs-studio
   obsidian
   inkscape
+  ladybird
   notepadqq
-  nexusmods-app-unfree
+  # nexusmods-app-unfree
   krita
   telegram-desktop
   
@@ -80,24 +85,6 @@
   nnn
   
   # Development
-  jetbrains.rider
-  unstable.avalonia
-  dotnet-sdk_9
-  fontconfig
-  (makeDesktopItem {
-          name = "rider-steam-run";
-          desktopName = "Rider (FHS - Avalonia)";
-          genericName = "Integrated Development Environment";
-          comment = "Run Rider inside a FHS environment for .NET UI dev";
-          icon = "rider";
-          exec = "steam-run rider %f";
-          categories = [ "Development" "IDE" ];
-          startupNotify = true;
-        })
-  jetbrains.rust-rover
-  rustc
-  rustup
-  cargo
   (makeDesktopItem {
           name = "rust-rover-steam-run";
           desktopName = "Rust Rover (FHS)";

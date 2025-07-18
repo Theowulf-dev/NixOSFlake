@@ -4,53 +4,77 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    
-    
-    # Home manager
+    rust-overlay.url = "github:oxalica/rust-overlay";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     winapps = {
       url = "github:winapps-org/winapps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, winapps, ... } @ inputs: 
-  {
-    packages = {
-      x86_64-linux = {
-        nixos = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            unstable = import nixpkgs-unstable {
-              system = "x86_64-linux";
-              config.allowUnfree = true;
-            };
+  outputs = { nixpkgs, nixpkgs-unstable, rust-overlay, home-manager, winapps, ... } @ inputs:
+    let
+      system = "x86_64-linux";
+
+      overlays = [ (import rust-overlay) ];
+
+      pkgs = import nixpkgs {
+        inherit system overlays;
+        config.allowUnfree = true;
+      };
+
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
+      rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+
+    in {
+      packages = {
+        ${system} = {
+          nixos = nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = { inherit inputs unstable; };
+            modules = [
+              home-manager.nixosModules.home-manager
+              ./configuration.nix
+            ];
           };
-          modules = [
-            home-manager.nixosModules.home-manager
-            ./configuration.nix
-          ];
         };
       };
-    };
-    
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      specialArgs = { 
-        inherit inputs;
-        unstable = import nixpkgs-unstable {
-          system = "x86_64-linux"; # or whatever your system is
-          config.allowUnfree = true;
-        };
+
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs unstable; };
+        modules = [
+          home-manager.nixosModules.home-manager
+          ./configuration.nix
+        ];
       };
-      modules = [ 
-        home-manager.nixosModules.home-manager
-        ./configuration.nix
-      ];
+
+      devShells.${system}.rust = pkgs.mkShell {
+        name = "rust-dev";
+
+        buildInputs = [
+          rustToolchain
+          pkgs.jetbrains.rust-rover
+          pkgs.rust-analyzer
+          pkgs.clippy
+          pkgs.rustfmt
+          pkgs.lldb
+          pkgs.pkg-config
+          pkgs.openssl
+        ];
+
+        shellHook = ''
+          echo "Rust dev shell with RustRover ready"
+        '';
+      };
     };
-  };
 }
