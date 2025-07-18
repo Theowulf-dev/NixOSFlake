@@ -86,12 +86,14 @@
   
   # Development
   (makeDesktopItem {
-          name = "rust-rover-steam-run";
-          desktopName = "Rust Rover (FHS)";
+          name = "rust-rover-dev-shell";
+          desktopName = "Rust Rover (Shell)";
           genericName = "Integrated Development Environment";
-          comment = "Run Rust Rover inside a FHS environment for dev";
+          comment = "Run Rust Rover inside a dev shell";
           icon = "rust-rover";
-          exec = "steam-run rust-rover %f";
+          exec = "${pkgs.writeShellScript "rust-rover-dev-shell" ''
+          nix develop /home/nix/Documents/Obsidian/NixOSFlake#rust --command rust-rover
+          ''}";
           categories = [ "Development" "IDE" ];
           startupNotify = true;
         })
