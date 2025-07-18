@@ -65,14 +65,18 @@
           rustToolchain
           pkgs.jetbrains.rust-rover
           pkgs.rust-analyzer
+          pkgs.rustup # Need to run rustup install stable
           pkgs.clippy
           pkgs.rustfmt
           pkgs.lldb
           pkgs.pkg-config
           pkgs.openssl
+          pkgs.wayland
+          pkgs.wlroots
         ];
 
         shellHook = ''
+          export XDG_SESSION_TYPE=wayland
           echo "Rust dev shell with RustRover ready"
         '';
       };
